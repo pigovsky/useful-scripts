@@ -8,7 +8,7 @@ LAST_PUB_VERSION="$(git describe --abbrev=0 --tags)"
 
 cd "$PRI_REPO_DIR" || exit $?
 
-LAST_PRI_VERSION="$(git describe --abbrev=0 --tags)"
+LAST_PRI_VERSION="$1"
 
 git diff "$LAST_PUB_VERSION..$LAST_PRI_VERSION" > /tmp/"$LAST_PRI_VERSION".diff
 
