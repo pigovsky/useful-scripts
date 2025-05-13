@@ -1,0 +1,15 @@
+#cloud-config
+autoinstall:
+    version: 1
+    locale: en_US
+    identity:
+        hostname: $VM_NAME
+        username: u
+        password: "$USER_PASSWORD"
+    ssh:
+        install-server: yes
+        authorized-keys:
+          - "$SSH_PUB"
+        allow-pw: yes
+    user-data:
+        disable_root: false

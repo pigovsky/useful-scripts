@@ -1,0 +1,4 @@
+/kvm/mnt/
+/kvm/user-data
+*.iso
+*.img
