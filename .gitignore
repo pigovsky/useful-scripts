@@ -1,4 +1,5 @@
 /kvm/mnt/
 /kvm/user-data
+/kvm/www/user-data
 *.iso
 *.img
