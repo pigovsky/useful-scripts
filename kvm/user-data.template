@@ -11,5 +11,12 @@ autoinstall:
         authorized-keys:
           - "$SSH_PUB"
         allow-pw: yes
+    # Install QEMU Guest Agent package
+    packages:
+        - qemu-guest-agent
+    # Ensure agent service is enabled & started
+    late-commands:
+        - curtin in-target --target=/target -- systemctl enable qemu-guest-agent
+        - curtin in-target --target=/target -- systemctl start qemu-guest-agent
     user-data:
         disable_root: false
