@@ -3,6 +3,12 @@ import shlex
 import subprocess
 import time
 
+DEPLOY_PLATFORM = True
+PLATFORM_BIN_DISTRIB = 'seqam-bin-v0.30.0-20250515.tgz'
+PLATFORM_BIN_DISTRIB_PATH = f'/tmp/{PLATFORM_BIN_DISTRIB}'
+PLATFROM_FOLDER = 'seqam'
+SSH_USER = 'u'
+
 
 VMs = [
     'seqam-central',
@@ -52,6 +58,22 @@ def get_vm_ip_with_retries(vm_name: str, timeout: int=300):
     raise TimeoutError("Timed out waiting for VM IP")
 
 
+# Run a remote command via SSH
+def run_ssh(vm_ip: str, command: str):
+    run_cmd(
+        f"ssh {SSH_USER}@{vm_ip} "
+        "-o StrictHostKeyChecking=no "
+        f'{command}', check=True
+    )
+
+
+def deploy_central_component(central_ip: str):
+    run_ssh(central_ip, f'mkdir {PLATFROM_FOLDER}')
+    run_cmd(f'scp {PLATFORM_BIN_DISTRIB_PATH} {SSH_USER}@{central_ip}:{PLATFROM_FOLDER}')
+    run_cmd(f'scp deploy/deploy-central-component.sh {SSH_USER}@{central_ip}:')
+    run_ssh(central_ip, './deploy-central-component.sh')
+
+
 if __name__ == '__main__':
     ROOT_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__)))
     os.chdir(ROOT_PATH)
@@ -71,3 +93,7 @@ if __name__ == '__main__':
         for vm_name, vm_ip in VM_IPs.items():
             file.write(f"{vm_name}: {vm_ip}\n")
     print(VM_IPs)
+
+    if DEPLOY_PLATFORM:
+        central_ip = VM_IPs['seqam-central']
+        deploy_central_component(central_ip)

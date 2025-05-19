@@ -2,7 +2,7 @@
 
 VM_RAM=4096
 VM_VCPUS=4
-VM_DISK_SIZE="40G"
+VM_DISK_SIZE="80G"
 ISO_PATH="$HOME/Downloads/ubuntu-25.04-live-server-amd64.iso"
 BRIDGE_NAME="virbr0" # Default libvirt bridge, or your custom bridge
 
