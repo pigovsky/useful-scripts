@@ -1,7 +1,7 @@
 #!/bin/bash
 
-VM_RAM=4096
-VM_VCPUS=4
+VM_RAM="$4"
+VM_VCPUS="$5"
 VM_DISK_SIZE="$3"
 ISO_PATH="$2"
 BRIDGE_NAME="virbr0" # Default libvirt bridge, or your custom bridge

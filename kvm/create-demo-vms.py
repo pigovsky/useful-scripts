@@ -96,27 +96,37 @@ VMs = {
     'seqam-central': {
         'deploy': deploy_central_component,
         'os': UBUNTU_SERVER_ISO,
-        'disk': '80G'
+        'disk': '80G',
+        'mem': 4096,
+        'cpus': 4,
     },
     'app-client': {
         'deploy': deploy_app_client,
         'os': UBUNTU_DESKTOP_ISO,
-        'disk': '80G'
+        'disk': '80G',
+        'mem': 2048,
+        'cpus': 2,
     },
     'app-server': {
         'deploy': deploy_app_server,
         'os': UBUNTU_SERVER_ISO,
-        'disk': '80G'
+        'disk': '80G',
+        'mem': 4096,
+        'cpus': 4,
     },
     'load-server': {
         'deploy': deploy_load_server,
         'os': UBUNTU_SERVER_ISO,
         'disk': '40G',
+        'mem': 2048,
+        'cpus': 2,
     },
     'load-client': {
         'deploy': deploy_load_client,
         'os': UBUNTU_SERVER_ISO,
         'disk': '40G',
+        'mem': 2048,
+        'cpus': 2,
     },
 }
 
@@ -185,8 +195,10 @@ if __name__ == '__main__':
         if not vm_ip:
             os_iso = details['os']
             disk_size = details['disk']
+            memory_size = details['mem']
+            cpus = details['cpus']
             run_cmd(
-                f'./gimme-ubuntu.sh "{vm_name}" "{os_iso}" "{disk_size}"'
+                f'./gimme-ubuntu.sh "{vm_name}" "{os_iso}" "{disk_size}" "{memory_size}" "{cpus}"'
             )
             vm_ip = get_vm_ip_with_retries(vm_name)
         print(f'You can ssh to {vm_name} using ssh u@{vm_ip}')
