@@ -4,16 +4,17 @@ import subprocess
 import time
 
 
-UBUNTU_SERVER_ISO = '/home/pigovsky/Downloads/soft/ubuntu-25.04-live-server-amd64.iso'
-UBUNTU_DESKTOP_ISO = '/home/pigovsky/Downloads/soft/ubuntu-25.04-desktop-amd64.iso'
+HOME = os.getenv('HOME')
+UBUNTU_SERVER_ISO = f'{HOME}/Downloads/soft/ubuntu-25.04-live-server-amd64.iso'
+UBUNTU_DESKTOP_ISO = f'{HOME}/Downloads/soft/ubuntu-25.04-desktop-amd64.iso'
 PLATFORM_BIN_DISTRIB = 'seqam-bin-v0.30.0-20250515.tgz'
-PLATFORM_BIN_DISTRIB_PATH = f'/tmp/{PLATFORM_BIN_DISTRIB}'
+PLATFORM_BIN_DISTRIB_PATH = f'{HOME}/{PLATFORM_BIN_DISTRIB}'
 PLATFROM_FOLDER = 'seqam'
 SSH_USER = 'u'
 
 
 def deploy_central_component(central_ip: str):
-    run_ssh(central_ip, f'mkdir {PLATFROM_FOLDER}')
+    run_ssh(central_ip, f'mkdir -p {PLATFROM_FOLDER}')
     run_scp(PLATFORM_BIN_DISTRIB_PATH, central_ip, PLATFROM_FOLDER)
     run_scp('deploy/deploy-central-component-0.sh', central_ip)
     run_ssh(central_ip, f'./deploy-central-component-0.sh "{PLATFORM_BIN_DISTRIB}" "{PLATFROM_FOLDER}"')
