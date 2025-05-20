@@ -37,7 +37,7 @@ def deploy_app_server(vm_ip: str):
         f'{SSH_USER}@{central_ip}:{PLATFROM_FOLDER}/bare-composes/rome-demo/',
         vm_ip
     )
-    run_ssh(vm_ip, './load-image.sh rome-demo/rome-demo.tar.gz')
+    run_ssh(vm_ip, './load-image.sh rome-demo/rome-demo.tar.gz && rm rome-demo/rome-demo.tar.gz')
     run_ssh(vm_ip, 'cd rome-demo; docker compose up -d')
 
 
@@ -101,12 +101,12 @@ VMs = {
     'app-client': {
         'deploy': deploy_app_client,
         'os': UBUNTU_DESKTOP_ISO,
-        'disk': '40G'
+        'disk': '80G'
     },
     'app-server': {
         'deploy': deploy_app_server,
         'os': UBUNTU_SERVER_ISO,
-        'disk': '40G'
+        'disk': '80G'
     },
     'load-server': {
         'deploy': deploy_load_server,
