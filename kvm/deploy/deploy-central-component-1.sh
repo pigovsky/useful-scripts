@@ -1,12 +1,7 @@
 #!/bin/bash
 
-MY_IP_ADDRESS="$(hostname -I)"
-PLATFORM_BIN_DISTRIB="seqam-bin-v0.30.0-20250515.tgz"
-PLATFROM_FOLDER="seqam"
-
-cd "$PLATFROM_FOLDER" || exit $?
-tar zxvf "$PLATFORM_BIN_DISTRIB" || exit $?
-./scripts/install-docker.sh || exit $?
+MY_IP_ADDRESS="$1"
+PLATFROM_FOLDER="$2"
 
 cd || exit $?
 git clone https://github.com/SigNoz/signoz.git || exit $?

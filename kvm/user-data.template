@@ -18,5 +18,6 @@ autoinstall:
     late-commands:
         - curtin in-target --target=/target -- systemctl enable qemu-guest-agent
         - curtin in-target --target=/target -- systemctl start qemu-guest-agent
+        - curtin in-target --target=/target -- bash -c "echo 'u ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers.d/u-nopasswd && chmod 0440 /etc/sudoers.d/u-nopasswd"
     user-data:
         disable_root: false

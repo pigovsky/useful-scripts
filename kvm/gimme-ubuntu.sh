@@ -2,8 +2,8 @@
 
 VM_RAM=4096
 VM_VCPUS=4
-VM_DISK_SIZE="80G"
-ISO_PATH="$HOME/Downloads/ubuntu-25.04-live-server-amd64.iso"
+VM_DISK_SIZE="$3"
+ISO_PATH="$2"
 BRIDGE_NAME="virbr0" # Default libvirt bridge, or your custom bridge
 
 export USER_PASSWORD='$6$FkOTB2dbfJoagdiM$Uhf8ZNT7XSuGboY7x7yOrhewj5Xko62RNvZvDniUngSyClkEov3APH5YlGuuSoLQEaAl57LwL8joBqlGFWOgS/'
@@ -49,7 +49,7 @@ time virt-install \
   --os-variant ubuntu25.04 \
   --disk path="${VM_DISK_PATH}",format=qcow2,size=${VM_DISK_SIZE%G} \
   --network bridge="${BRIDGE_NAME}" \
-  --graphics none \
+  --graphics vnc,listen=0.0.0.0 \
   --console pty,target_type=serial \
   --location "${ISO_PATH}",kernel=casper/vmlinuz,initrd=casper/initrd \
   --extra-args "console=ttyS0,115200n8 autoinstall ds=nocloud-net;s=http://_gateway:3003/" \

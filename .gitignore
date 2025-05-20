@@ -4,3 +4,4 @@
 /kvm/www/user-data
 *.iso
 *.img
+.idea/
