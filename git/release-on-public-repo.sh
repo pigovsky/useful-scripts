@@ -14,7 +14,7 @@ git diff "$LAST_PUB_VERSION..$LAST_PRI_VERSION" > /tmp/"$LAST_PRI_VERSION".diff
 
 cd "$PUB_REPO_DIR" || exit $?
 
-git apply /tmp/"$LAST_PRI_VERSION".diff || exit $?
+git apply --exclude="*.png" /tmp/"$LAST_PRI_VERSION".diff || exit $?
 
 git add . || exit $?
 
