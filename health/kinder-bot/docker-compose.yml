@@ -1,0 +1,13 @@
+services:
+  kinder-bot:
+    build: .
+    restart: unless-stopped
+    environment:
+      - KB_SSH_USER=${KB_SSH_USER}
+      - KB_BOT_TOKEN=${KB_BOT_TOKEN}
+      - KB_SECRET_PASSWORD=${KB_SECRET_PASSWORD}
+    volumes:
+      - /home/${KB_SSH_USER}/.kinder-bot.pigovsky.com:/mnt/kinder_bot_data
+      - /home/${KB_SSH_USER}/.ssh:/mnt/host_ssh
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
