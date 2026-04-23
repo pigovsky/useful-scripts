@@ -6,4 +6,4 @@ export KB_SSH_USER
 export KB_BOT_TOKEN
 export KB_SECRET_PASSWORD
 
-docker compose up --build
+docker compose up -d
