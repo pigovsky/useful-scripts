@@ -1,6 +1,6 @@
 services:
   kinder-bot:
-    build: .
+    image: pigovsky/kinder-bot.pigovsky.com:${VERSION:-latest}
     restart: unless-stopped
     environment:
       - KB_SSH_USER=${KB_SSH_USER}
