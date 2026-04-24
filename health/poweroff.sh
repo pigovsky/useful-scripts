@@ -1,14 +1,9 @@
-#!/bin/bash -x
+#!/bin/bash
+#
 sleep 10
-./say.sh "Yeva, dosyt!"
-sleep 10
-./say.sh "Yeva, dosyt!"
-sleep 10
-./say.sh "Yeva, dosyt!"
-sleep 10
-./say.sh "Yeva, dosyt!"
-sleep 10
-./say.sh "Yeva, dosyt!"
-poweroff
-
+playerctl pause
+./volume.sh 1.3
+mpg123 "$1"
+./volume.sh 1
+sudo poweroff
 
