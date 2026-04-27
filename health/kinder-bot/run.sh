@@ -1,5 +1,7 @@
 #!/bin/bash -x
 
+cd "$(dirname "$0")" || exit $?
+
 . ~/.kinder-bot.pigovsky.com/env.sh
 
 VERSION=$(cat .kinder-bot.pigovsky.com/VERSION | tr -d '[:space:]')
@@ -9,4 +11,4 @@ export KB_SSH_USER
 export KB_BOT_TOKEN
 export KB_SECRET_PASSWORD
 
-docker compose up -d
+nohup docker compose up -d &
