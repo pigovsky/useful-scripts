@@ -5,3 +5,4 @@
 *.iso
 *.img
 .idea/
+nohup.out
